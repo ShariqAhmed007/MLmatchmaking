@@ -361,7 +361,7 @@ knitr::opts_chunk$set(echo = FALSE,
 heatmap(cor(int[,-51]))
 ```
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](MLmatchmaking/plots/unnamed-chunk-13-1.png)
 
 Creating a dataset of 5000 from 800 with replacement
 
