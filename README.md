@@ -1,6 +1,4 @@
-# MLmatchmaking
-
-# Using-ML-for-matchmaking
+# Using Machine Learning for matchmaking
 Using Machine Learning to find people with similar personalities &amp; interest for matchmaking
 
 ### Objective:
