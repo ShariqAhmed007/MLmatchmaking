@@ -361,7 +361,7 @@ knitr::opts_chunk$set(echo = FALSE,
 heatmap(cor(int[,-51]))
 ```
 
-![](MLmatchmaking/plots/unnamed-chunk-13-1.png)
+![](plots/unnamed-chunk-13-1.png)
 
 Creating a dataset of 5000 from 800 with replacement
 
@@ -524,7 +524,7 @@ Creating a dataset of 5000 from 800 with replacement
     ##                                  
     ##                                3
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-17-1.png) ![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](plots/unnamed-chunk-17-1.png) ![](plots/unnamed-chunk-18-1.png)
 
 PRINCIPAL COMPONENT ANALYSIS
 ============================
@@ -598,7 +598,7 @@ Principal Component Analysis on interest columns
     ## 325 0.2074907 -0.239079499
     ## 416 0.1297339  0.034554799
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-20-1.png)![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-20-2.png)
+![](plots/unnamed-chunk-20-1.png)![](plots/unnamed-chunk-20-2.png)
 
     ## Importance of components:
     ##                           PC1     PC2     PC3     PC4     PC5     PC6     PC7
@@ -634,15 +634,15 @@ Principal Component Analysis on interest columns
     ## Proportion of Variance 0.00423
     ## Cumulative Proportion  1.00000
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-21-1.png)
+![](plots/unnamed-chunk-21-1.png)
 
 Proportion of Variance explained by each additional PC
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-22-1.png)
+![](plots/unnamed-chunk-22-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-23-1.png)
+![](plots/unnamed-chunk-23-1.png)
 
     ##             PC1        PC2         PC3         PC4        PC5        PC6
     ## 849  2.40633523 1.18845622 -2.20520117  0.67070390 -0.4008390  0.9623631
@@ -788,7 +788,7 @@ Principal Component Analysis on Big5 columns
     ## 8502   0.85422051 -2.0360668
     ## 3293   0.10754078  0.5556684
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-27-1.png)![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-27-2.png)
+![](plots/unnamed-chunk-27-1.png)![](plots/unnamed-chunk-27-2.png)
 
     ## Importance of components:
     ##                           PC1     PC2     PC3     PC4     PC5     PC6     PC7
@@ -824,15 +824,15 @@ Principal Component Analysis on Big5 columns
     ## Proportion of Variance 0.00419
     ## Cumulative Proportion  1.00000
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-28-1.png)
+![](plots/unnamed-chunk-28-1.png)
 
 Proportion of Variance explained by each additional PC
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-29-1.png)
+![](plots/unnamed-chunk-29-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](plots/unnamed-chunk-30-1.png)
 
     ##              PC1         PC2        PC3        PC4        PC5        PC6
     ## 12171 -4.2281719  0.09414946 -1.3358523  1.0367636 -3.1158100 -0.5579354
@@ -1034,7 +1034,7 @@ Heirarchical Clustering
     ##  3rd Qu.: 0.661558   3rd Qu.: 0.705060  
     ##  Max.   : 3.054591   Max.   : 3.086630
 
-Plotting the dendogram ![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-39-1.png)
+Plotting the dendogram ![](plots/unnamed-chunk-39-1.png)
 
 ### Setting the value of clusters at 12
 
@@ -1047,7 +1047,7 @@ KMeansClustering
     ## 12171 13326  4831 11065  8502  3293 
     ##     1     9    10     5     6     6
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-41-1.png)
+![](plots/unnamed-chunk-41-1.png)
 
     ## 12171 13326  4831 11065  8502  3293  3470 15729 17157 11904 
     ##     1     9    10     5     6     6     1    10     7     4
