@@ -354,16 +354,21 @@ int = na.omit(int)
 ```
 
 ``` r
-knitr::opts_chunk$set(echo = FALSE, 
+knitr::opts_chunk$set(echo = TRUE, 
                       warning = FALSE, 
                       messages = FALSE, 
                       include = TRUE)
 heatmap(cor(int[,-51]))
+
+![](Plots/unnamed-chunk-13-1.png)
 ```
-
-![](plots/unnamed-chunk-13-1.png)
-
 Creating a dataset of 5000 from 800 with replacement
+
+``` r
+set.seed(2)
+intlarge = int[sample.int(nrow(int), 5000, replace = TRUE),]
+summary(int)
+```
 
     ##      Music       Classical.music    Musical           Pop       
     ##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
@@ -459,6 +464,11 @@ Creating a dataset of 5000 from 800 with replacement
 
 ### Master dataset with names, Big5 data and Interest data
 
+``` r
+train = data.frame(train, intlarge)
+names(train)
+```
+
     ##   [1] "names"                   "race"                   
     ##   [3] "age"                     "engnat"                 
     ##   [5] "gender"                  "country"                
@@ -514,6 +524,10 @@ Creating a dataset of 5000 from 800 with replacement
     ## [105] "Appearence.and.gestures" "Happiness.in.life"      
     ## [107] "Education"
 
+``` r
+sort(table(train$Education), decreasing = TRUE)
+```
+
     ## 
     ##                 secondary school          college/bachelor degree 
     ##                             3130                             1001 
@@ -524,7 +538,25 @@ Creating a dataset of 5000 from 800 with replacement
     ##                                  
     ##                                3
 
-![](plots/unnamed-chunk-17-1.png) ![](plots/unnamed-chunk-18-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+hist(train$age, col = 'red', xlab = 'Age', ylab = 'Frequency', main = 'AGE FREQUENCY')
+```
+
+![](Plots/unnamed-chunk-17-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+hist(train$gender, col = 'blue', xlab = 'Gender
+     1=Male, 2=Female, 3=Other', ylab = 'Frequency', main = 'GENDER FREQUENCY')
+```
+
+![](Plots/unnamed-chunk-18-1.png)
 
 PRINCIPAL COMPONENT ANALYSIS
 ============================
@@ -532,7 +564,16 @@ PRINCIPAL COMPONENT ANALYSIS
 Principal Component Analysis on interest columns
 ------------------------------------------------
 
+``` r
+pr.out = prcomp(intlarge[,1:50], scale = TRUE)
+head(pr.out$rotation[1:20])
+```
+
     ## [1] -0.06634427 -0.25277250 -0.22282635  0.03677082 -0.12167650 -0.05569898
+
+``` r
+head(pr.out$x)
+```
 
     ##             PC1        PC2         PC3         PC4        PC5        PC6
     ## 849  2.40633523 1.18845622 -2.20520117  0.67070390 -0.4008390  0.9623631
@@ -598,7 +639,27 @@ Principal Component Analysis on interest columns
     ## 325 0.2074907 -0.239079499
     ## 416 0.1297339  0.034554799
 
-![](plots/unnamed-chunk-20-1.png)![](plots/unnamed-chunk-20-2.png)
+``` r
+par(mfrow=c(1,1))
+plot(pr.out$x[,1:2], pch=19, xlab = 'PC1', ylab='PC2')
+```
+
+![](Plots/unnamed-chunk-20-1.png)
+
+``` r
+plot(pr.out$x[,c(1,3)], pch=19, xlab = 'PC1', ylab='PC3')
+```
+
+![](Plots/unnamed-chunk-20-2.png)
+
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+summary(pr.out)
+```
 
     ## Importance of components:
     ##                           PC1     PC2     PC3     PC4     PC5     PC6     PC7
@@ -634,15 +695,46 @@ Principal Component Analysis on interest columns
     ## Proportion of Variance 0.00423
     ## Cumulative Proportion  1.00000
 
-![](plots/unnamed-chunk-21-1.png)
+``` r
+plot(pr.out$sdev, xlab='Principal Component', ylab='Standard Deviation', main='Standard Deviation explained by each PC')
+```
+
+![](Plots/unnamed-chunk-21-1.png)
 
 Proportion of Variance explained by each additional PC
 
-![](plots/unnamed-chunk-22-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+pve = 100*pr.out$sdev^2/sum(pr.out$sdev^2)
+par(mfrow=c(1,2))
+plot(pve[1:18],type='o',ylab='Prop. var. explained', xlab="Principal Component", col='blue')
+plot(cumsum(pve[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
+```
+
+![](Plots/unnamed-chunk-22-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
-![](plots/unnamed-chunk-23-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+par(mfrow=c(1,1))
+plot(cumsum(pve[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
+abline(h=60)
+```
+
+![](Plots/unnamed-chunk-23-1.png)
+
+``` r
+head(pr.out$x[,1:14])
+```
 
     ##             PC1        PC2         PC3         PC4        PC5        PC6
     ## 849  2.40633523 1.18845622 -2.20520117  0.67070390 -0.4008390  0.9623631
@@ -667,6 +759,11 @@ Setting a cutoff point at 60% cumulative percentage
     ## 416 -0.8228892 -2.0800021
 
 ### Taking out the first 14 PCs
+
+``` r
+pca.int.data = pr.out$x[,1:14]
+head(pca.int.data)
+```
 
     ##             PC1        PC2         PC3         PC4        PC5        PC6
     ## 849  2.40633523 1.18845622 -2.20520117  0.67070390 -0.4008390  0.9623631
@@ -693,7 +790,16 @@ Setting a cutoff point at 60% cumulative percentage
 Principal Component Analysis on Big5 columns
 --------------------------------------------
 
+``` r
+dim(train)
+```
+
     ## [1] 5000  107
+
+``` r
+pr.out2 = prcomp(train[,7:56], scale = TRUE)
+head(pr.out2$rotation[,1:20])
+```
 
     ##           PC1         PC2         PC3         PC4         PC5         PC6
     ## E1  0.1814075 -0.12312074  0.15068499 -0.09008466  0.15962638 -0.10666695
@@ -723,6 +829,10 @@ Principal Component Analysis on Big5 columns
     ## E4 -0.014024581  0.015964943
     ## E5 -0.005559828 -0.074931141
     ## E6  0.111860803  0.239648848
+
+``` r
+head(pr.out2$x)
+```
 
     ##              PC1         PC2        PC3        PC4        PC5        PC6
     ## 12171 -4.2281719  0.09414946 -1.3358523  1.0367636 -3.1158100 -0.5579354
@@ -788,7 +898,27 @@ Principal Component Analysis on Big5 columns
     ## 8502   0.85422051 -2.0360668
     ## 3293   0.10754078  0.5556684
 
-![](plots/unnamed-chunk-27-1.png)![](plots/unnamed-chunk-27-2.png)
+``` r
+par(mfrow=c(1,1))
+plot(pr.out2$x[,1:2], pch=19, xlab = 'PC1', ylab='PC2')
+```
+
+![](Plots/unnamed-chunk-27-1.png)
+
+``` r
+plot(pr.out2$x[,c(1,3)], pch=19, xlab = 'PC1', ylab='PC3')
+```
+
+![](Plots/unnamed-chunk-27-2.png)
+
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+summary(pr.out2)
+```
 
     ## Importance of components:
     ##                           PC1     PC2     PC3     PC4     PC5     PC6     PC7
@@ -824,15 +954,46 @@ Principal Component Analysis on Big5 columns
     ## Proportion of Variance 0.00419
     ## Cumulative Proportion  1.00000
 
-![](plots/unnamed-chunk-28-1.png)
+``` r
+plot(pr.out2$sdev, xlab='Principal Component', ylab='Standard Deviation', main='Standard Deviation explained by each PC')
+```
+
+![](Plots/unnamed-chunk-28-1.png)
 
 Proportion of Variance explained by each additional PC
 
-![](plots/unnamed-chunk-29-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+pve2= 100*pr.out2$sdev^2/sum(pr.out2$sdev^2)
+par(mfrow=c(1,2))
+plot(pve2[1:20],type='o',ylab='Prop. var. explained', xlab="Principal Component", col='blue')
+plot(cumsum(pve2[1:20]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
+```
+
+![](Plots/unnamed-chunk-29-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
-![](plots/unnamed-chunk-30-1.png)
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+par(mfrow=c(1,1))
+plot(cumsum(pve2[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
+abline(h=60)
+```
+
+![](Plots/unnamed-chunk-30-1.png)
+
+``` r
+head(pr.out2$x[,1:12])
+```
 
     ##              PC1         PC2        PC3        PC4        PC5        PC6
     ## 12171 -4.2281719  0.09414946 -1.3358523  1.0367636 -3.1158100 -0.5579354
@@ -851,6 +1012,11 @@ Setting a cutoff point at 60% cumulative percentage
 
 ### Taking out first 12 PCs
 
+``` r
+pca.big.data = pr.out2$x[,1:12]
+head(pca.big.data)
+```
+
     ##              PC1         PC2        PC3        PC4        PC5        PC6
     ## 12171 -4.2281719  0.09414946 -1.3358523  1.0367636 -3.1158100 -0.5579354
     ## 13326 -1.1591050  0.40162890  2.0486767  1.2753684  3.9863527  0.3281744
@@ -868,9 +1034,20 @@ Setting a cutoff point at 60% cumulative percentage
 
 ### Creating a dataframe with Principal Component values only
 
+``` r
+pcatrain = data.frame(train[,1:6], pca.big.data)
+names(pcatrain) 
+```
+
     ##  [1] "names"   "race"    "age"     "engnat"  "gender"  "country" "PC1"    
     ##  [8] "PC2"     "PC3"     "PC4"     "PC5"     "PC6"     "PC7"     "PC8"    
     ## [15] "PC9"     "PC10"    "PC11"    "PC12"
+
+``` r
+names(pcatrain) = c("names","race","age","engnat","gender","country",
+                    "bigPC1","bigPC2","bigPC3","bigPC4","bigPC5","bigPC6","bigPC7","bigPC8","bigPC9","bigPC10","bigPC11","bigPC12")
+head(pcatrain)
+```
 
     ##            names race age engnat gender country     bigPC1      bigPC2
     ## 12171      Penni    3  21      1      1      US -4.2281719  0.09414946
@@ -894,11 +1071,26 @@ Setting a cutoff point at 60% cumulative percentage
     ## 8502  -0.29206909 -0.4725029 -0.7379404  1.5372819
     ## 3293   0.65128441 -0.5163869 -0.9335496 -0.8234795
 
+``` r
+pcatrain = data.frame(pcatrain, pca.int.data)
+names(pcatrain) 
+```
+
     ##  [1] "names"   "race"    "age"     "engnat"  "gender"  "country" "bigPC1" 
     ##  [8] "bigPC2"  "bigPC3"  "bigPC4"  "bigPC5"  "bigPC6"  "bigPC7"  "bigPC8" 
     ## [15] "bigPC9"  "bigPC10" "bigPC11" "bigPC12" "PC1"     "PC2"     "PC3"    
     ## [22] "PC4"     "PC5"     "PC6"     "PC7"     "PC8"     "PC9"     "PC10"   
     ## [29] "PC11"    "PC12"    "PC13"    "PC14"
+
+``` r
+names(pcatrain) = c("names","race","age","engnat","gender","country",
+                    "bigPC1","bigPC2","bigPC3","bigPC4","bigPC5","bigPC6","bigPC7","bigPC8","bigPC9","bigPC10","bigPC11","bigPC12",
+                    "intPC1","intPC2","intPC3","intPC4","intPC5","intPC6","intPC7","intPC8","intPC9","intPC10","intPC11","intPC12","intPC13","intPC14")
+```
+
+``` r
+head(pcatrain)
+```
 
     ##            names race age engnat gender country     bigPC1      bigPC2
     ## 12171      Penni    3  21      1      1      US -4.2281719  0.09414946
@@ -935,6 +1127,10 @@ Setting a cutoff point at 60% cumulative percentage
     ## 11065  0.3996406 -1.4110333  0.3824675 -1.8161302  0.8601170 -0.6864529
     ## 8502   0.5380429  0.3662837 -0.1728037 -0.3725905 -0.5157871 -0.4723268
     ## 3293   2.5091072  0.4679246  0.4802233  1.4365345 -0.8228892 -2.0800021
+
+``` r
+names(pcatrain)
+```
 
     ##  [1] "names"   "race"    "age"     "engnat"  "gender"  "country" "bigPC1" 
     ##  [8] "bigPC2"  "bigPC3"  "bigPC4"  "bigPC5"  "bigPC6"  "bigPC7"  "bigPC8" 
@@ -942,11 +1138,22 @@ Setting a cutoff point at 60% cumulative percentage
     ## [22] "intPC4"  "intPC5"  "intPC6"  "intPC7"  "intPC8"  "intPC9"  "intPC10"
     ## [29] "intPC11" "intPC12" "intPC13" "intPC14"
 
+``` r
+remove(pr.out)
+remove(pr.out2)
+remove(pca.big.data)
+remove(pca.int.data)
+```
+
 CLUSTERING PEOPLE ON THE BASIS OF THEIR INTERESTS
 =================================================
 
 Heirarchical Clustering
 -----------------------
+
+``` r
+head(pcatrain)
+```
 
     ##            names race age engnat gender country     bigPC1      bigPC2
     ## 12171      Penni    3  21      1      1      US -4.2281719  0.09414946
@@ -983,6 +1190,11 @@ Heirarchical Clustering
     ## 11065  0.3996406 -1.4110333  0.3824675 -1.8161302  0.8601170 -0.6864529
     ## 8502   0.5380429  0.3662837 -0.1728037 -0.3725905 -0.5157871 -0.4723268
     ## 3293   2.5091072  0.4679246  0.4802233  1.4365345 -0.8228892 -2.0800021
+
+``` r
+scaled = scale(pcatrain[,7:32])
+summary(pcatrain[,7:32])
+```
 
     ##      bigPC1              bigPC2             bigPC3             bigPC4       
     ##  Min.   :-11.97996   Min.   :-6.64893   Min.   :-6.14696   Min.   :-6.9228  
@@ -1034,25 +1246,77 @@ Heirarchical Clustering
     ##  3rd Qu.: 0.661558   3rd Qu.: 0.705060  
     ##  Max.   : 3.054591   Max.   : 3.086630
 
-Plotting the dendogram ![](plots/unnamed-chunk-39-1.png)
+``` r
+distances = dist(scaled[,13:26], method = "euclidean")
+hc = hclust(distances, method = 'ward.D')
+remove(distances)
+```
+
+Plotting the dendogram
+
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+plot(hc)
+abline(h=185, col = 'red')
+```
+
+![](Plots/unnamed-chunk-39-1.png)
 
 ### Setting the value of clusters at 12
+
+``` r
+hc.cluster = cutree(hc, h=185)
+head(hc.cluster)
+```
 
     ## 12171 13326  4831 11065  8502  3293 
     ##     1     2     1     3     2     4
 
+``` r
+remove(scaled)
+```
+
 KMeansClustering
 ----------------
+
+``` r
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      messages = FALSE, 
+                      include = TRUE)
+
+kmc = kmeans(pcatrain[,7:32], centers = 12, iter.max = 20)
+head(kmc$cluster)
+```
 
     ## 12171 13326  4831 11065  8502  3293 
     ##     1     9    10     5     6     6
 
-![](plots/unnamed-chunk-41-1.png)
+``` r
+par(mfrow = c(1,1))
+plot(kmc$cluster)
+```
+
+![](Plots/unnamed-chunk-41-1.png)
+
+``` r
+kmc$cluster[1:10]
+```
 
     ## 12171 13326  4831 11065  8502  3293  3470 15729 17157 11904 
     ##     1     9    10     5     6     6     1    10     7     4
 
 Joining the cluster assigned with the PCA'd data
+
+``` r
+cluster = kmc$cluster
+pcatrain = data.frame(pcatrain, cluster)
+names(pcatrain)
+```
 
     ##  [1] "names"   "race"    "age"     "engnat"  "gender"  "country" "bigPC1" 
     ##  [8] "bigPC2"  "bigPC3"  "bigPC4"  "bigPC5"  "bigPC6"  "bigPC7"  "bigPC8" 
@@ -1064,6 +1328,11 @@ FINAL STEPS
 ===========
 
 ### Selecting close matches for selected user
+
+``` r
+user = pcatrain[pcatrain$names == 'Penni',]
+user
+```
 
     ##       names race age engnat gender country    bigPC1     bigPC2    bigPC3
     ## 12171 Penni    3  21      1      1      US -4.228172 0.09414946 -1.335852
@@ -1077,6 +1346,12 @@ FINAL STEPS
     ## 12171 0.482601 0.6609888       1
 
 ### Filtering out people from the same cluster, age-group and country
+
+``` r
+closecluster = pcatrain %>% filter(kmc$cluster == user$cluster)
+refined = as.data.frame(subset(closecluster,closecluster$country == user$country & closecluster$gender != user$gender & (closecluster$age >= (user$age-3) & closecluster$age <= (user$age+3))))
+head(refined)
+```
 
     ##      names race age engnat gender country     bigPC1     bigPC2     bigPC3
     ## 2   Pattie    1  20      1      2      US -1.3591848 -0.4410222 -2.0629725
@@ -1116,8 +1391,18 @@ FINAL STEPS
 
 ### Finding people with personality most similar to user's
 
+``` r
+for(i in c(1:nrow(refined))) {refined$sumdifference[i] = sum(sqrt((refined[i,7:18]-user[,7:18])^2))}
+selected = head(refined[order(refined$sumdifference),],10)$names
+selected
+```
+
     ##  [1] "Brody"    "Alissa"   "Young"    "Lizabeth" "Reinhold" "Liza"    
     ##  [7] "Meghann"  "Ephram"   "Keenen"   "Pattie"
+
+``` r
+head(refined[order(refined$sumdifference),c(1,33)],10)
+```
 
     ##        names cluster
     ## 31     Brody       1
@@ -1133,6 +1418,10 @@ FINAL STEPS
 
 Original responses of the filtered people and user
 --------------------------------------------------
+
+``` r
+train[train$names==user$names,]
+```
 
     ##       names race age engnat gender country E1 E2 E3 E4 E5 E6 E7 E8 E9 E10 N1 N2
     ## 12171 Penni    3  21      1      1      US  1  5  1  5  2  5  1  4  1   5  5  4
@@ -1158,6 +1447,10 @@ Original responses of the filtered people and user
     ## 12171                 4    2                       5                 5
     ##                     Education
     ## 12171 college/bachelor degree
+
+``` r
+train[train$names %in% selected,]
+```
 
     ##          names race age engnat gender country E1 E2 E3 E4 E5 E6 E7 E8 E9 E10 N1
     ## 3470    Pattie    1  20      1      2      US  2  3  2  4  3  2  3  4  2   4  4
