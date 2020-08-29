@@ -106,3 +106,11 @@ hand	"What hand do you use to write with?". 1=Right, 2=Left, 3=Both (0=missed)
 
 Interests dataset measures a person's response to following topics on a scale of 1 to 5:
 Music,Classical music,Musical,Pop,Rock,Metal or Hardrock,"Hiphop, Rap",Rock n roll,Alternative,"Techno, Trance",Movies,Horror,Thriller,Comedy,Romantic,Sci-fi,War,Fantasy/Fairy tales,Animated,Documentary,Action,History,Psychology,Politics,Mathematics,Physics,Internet,PC,Economy Management,Biology,Chemistry,Reading,Geography,Foreign languages,Medicine,Law,Cars,Art exhibitions,Religion,Dancing,Musical instruments,Writing,Passive sport,Active sport,Science and technology,Theatre,Adrenaline sports,Pets,Appearence and gestures,Happiness in life,Education
+
+
+
+#### You can connect with me on:
+
+#### [LinkedIn](https://www.linkedin.com/in/shariq06ahmed/)
+
+#### [GitHub](https://github.com/ShariqAhmed007)
