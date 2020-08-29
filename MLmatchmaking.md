@@ -359,9 +359,9 @@ knitr::opts_chunk$set(echo = TRUE,
                       messages = FALSE, 
                       include = TRUE)
 heatmap(cor(int[,-51]))
-
-![](plots/unnamed-chunk-13-1.png)
 ```
+![](plots/unnamed-chunk-13-1.png)
+
 Creating a dataset of 5000 from 800 with replacement
 
 ``` r
