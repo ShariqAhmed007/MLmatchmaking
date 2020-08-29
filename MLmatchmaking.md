@@ -360,7 +360,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       include = TRUE)
 heatmap(cor(int[,-51]))
 
-![](Plots/unnamed-chunk-13-1.png)
+![](plots/unnamed-chunk-13-1.png)
 ```
 Creating a dataset of 5000 from 800 with replacement
 
@@ -546,7 +546,7 @@ knitr::opts_chunk$set(echo = TRUE,
 hist(train$age, col = 'red', xlab = 'Age', ylab = 'Frequency', main = 'AGE FREQUENCY')
 ```
 
-![](Plots/unnamed-chunk-17-1.png)
+![](plots/unnamed-chunk-17-1.png)
 ``` r
 knitr::opts_chunk$set(echo = TRUE, 
                       warning = FALSE, 
@@ -556,7 +556,7 @@ hist(train$gender, col = 'blue', xlab = 'Gender
      1=Male, 2=Female, 3=Other', ylab = 'Frequency', main = 'GENDER FREQUENCY')
 ```
 
-![](Plots/unnamed-chunk-18-1.png)
+![](plots/unnamed-chunk-18-1.png)
 
 PRINCIPAL COMPONENT ANALYSIS
 ============================
@@ -644,13 +644,13 @@ par(mfrow=c(1,1))
 plot(pr.out$x[,1:2], pch=19, xlab = 'PC1', ylab='PC2')
 ```
 
-![](Plots/unnamed-chunk-20-1.png)
+![](plots/unnamed-chunk-20-1.png)
 
 ``` r
 plot(pr.out$x[,c(1,3)], pch=19, xlab = 'PC1', ylab='PC3')
 ```
 
-![](Plots/unnamed-chunk-20-2.png)
+![](plots/unnamed-chunk-20-2.png)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE, 
@@ -699,7 +699,7 @@ summary(pr.out)
 plot(pr.out$sdev, xlab='Principal Component', ylab='Standard Deviation', main='Standard Deviation explained by each PC')
 ```
 
-![](Plots/unnamed-chunk-21-1.png)
+![](plots/unnamed-chunk-21-1.png)
 
 Proportion of Variance explained by each additional PC
 
@@ -715,7 +715,7 @@ plot(pve[1:18],type='o',ylab='Prop. var. explained', xlab="Principal Component",
 plot(cumsum(pve[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
 ```
 
-![](Plots/unnamed-chunk-22-1.png)
+![](plots/unnamed-chunk-22-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
@@ -730,7 +730,7 @@ plot(cumsum(pve[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Principa
 abline(h=60)
 ```
 
-![](Plots/unnamed-chunk-23-1.png)
+![](plots/unnamed-chunk-23-1.png)
 
 ``` r
 head(pr.out$x[,1:14])
@@ -903,13 +903,13 @@ par(mfrow=c(1,1))
 plot(pr.out2$x[,1:2], pch=19, xlab = 'PC1', ylab='PC2')
 ```
 
-![](Plots/unnamed-chunk-27-1.png)
+![](plots/unnamed-chunk-27-1.png)
 
 ``` r
 plot(pr.out2$x[,c(1,3)], pch=19, xlab = 'PC1', ylab='PC3')
 ```
 
-![](Plots/unnamed-chunk-27-2.png)
+![](plots/unnamed-chunk-27-2.png)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE, 
@@ -958,7 +958,7 @@ summary(pr.out2)
 plot(pr.out2$sdev, xlab='Principal Component', ylab='Standard Deviation', main='Standard Deviation explained by each PC')
 ```
 
-![](Plots/unnamed-chunk-28-1.png)
+![](plots/unnamed-chunk-28-1.png)
 
 Proportion of Variance explained by each additional PC
 
@@ -974,7 +974,7 @@ plot(pve2[1:20],type='o',ylab='Prop. var. explained', xlab="Principal Component"
 plot(cumsum(pve2[1:20]),type='o',ylab='Cum. Prop. var. explained', xlab="Principal Component", col='blue')
 ```
 
-![](Plots/unnamed-chunk-29-1.png)
+![](plots/unnamed-chunk-29-1.png)
 
 Setting a cutoff point at 60% cumulative percentage
 
@@ -989,7 +989,7 @@ plot(cumsum(pve2[1:18]),type='o',ylab='Cum. Prop. var. explained', xlab="Princip
 abline(h=60)
 ```
 
-![](Plots/unnamed-chunk-30-1.png)
+![](plots/unnamed-chunk-30-1.png)
 
 ``` r
 head(pr.out2$x[,1:12])
@@ -1264,7 +1264,7 @@ plot(hc)
 abline(h=185, col = 'red')
 ```
 
-![](Plots/unnamed-chunk-39-1.png)
+![](plots/unnamed-chunk-39-1.png)
 
 ### Setting the value of clusters at 12
 
@@ -1301,7 +1301,7 @@ par(mfrow = c(1,1))
 plot(kmc$cluster)
 ```
 
-![](Plots/unnamed-chunk-41-1.png)
+![](plots/unnamed-chunk-41-1.png)
 
 ``` r
 kmc$cluster[1:10]
