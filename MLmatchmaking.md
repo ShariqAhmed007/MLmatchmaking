@@ -1228,7 +1228,7 @@ plot(hc)
 abline(h=500, col = 'red')
 ```
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-39-1.png)
+![](plots/unnamed-chunk-39-1.png)
 
 #### Heirarchical Clustering shows a good value of k to be 7
 
@@ -1270,7 +1270,7 @@ plot(1:k.max, bss, type="b", pch = 19, frame = FALSE,
      ylab="Between clusters sum of squares")
 ```
 
-![](MLmatchmaking_files/figure-markdown_github/unnamed-chunk-42-1.png)
+![](plots/unnamed-chunk-42-1.png)
 
 #### Setting k = 6 finally
 
