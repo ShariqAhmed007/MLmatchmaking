@@ -1331,6 +1331,20 @@ FINAL STEPS
 ### Selecting close matches for selected user
 
 ``` r
+head(pcatrain[,1:6])
+```
+
+    ##            names race age engnat gender country
+    ## 12171      Penni    3  21      1      1      US
+    ## 13326 Margaretha    3  18      2      1      IT
+    ## 4831     Isadore    3  34      1      2      US
+    ## 11065    Kinsley    3  25      1      2      US
+    ## 8502        Shad    1  24      1      2      US
+    ## 3293        Sara   13  42      2      1      SA
+
+Let's take 'Penni' as our user
+
+``` r
 user = pcatrain[pcatrain$names == 'Penni',]
 user
 ```
@@ -1390,7 +1404,7 @@ head(refined)
     ## 21  2.8924941  1.6430890 -0.8658139 -0.13037245  1.1646183       2
     ## 24 -1.2414851  0.5321581 -1.3933501 -1.43915252 -1.1400259       2
 
-### Finding people with personality most similar to user's
+### Finding people with personality most similar to user's using sum of difference in personality
 
 ``` r
 for(i in c(1:nrow(refined))) {refined$sumdifference[i] = sum(sqrt((refined[i,7:18]-user[,7:18])^2))}
@@ -1417,7 +1431,7 @@ head(refined[order(refined$sumdifference),c(1,33)],10)
     ## 110   Keenen       2
     ## 3     Pattie       2
 
-Original responses of the filtered people and user
+Original responses of the user and filtered people 
 --------------------------------------------------
 
 ``` r
