@@ -95,17 +95,22 @@ N10	I often feel blue.
 
 On the next page the following values were collected.
 
-race	Chosen from a drop down menu. 1=Mixed Race, 2=Arctic (Siberian, Eskimo), 3=Caucasian (European), 4=Caucasian (Indian), 5=Caucasian (Middle East), 6=Caucasian (North African, Other), 7=Indigenous Australian, 8=Native American, 9=North East Asian (Mongol, Tibetan, Korean Japanese, etc), 10=Pacific (Polynesian, Micronesian, etc), 11=South East Asian (Chinese, Thai, Malay, Filipino, etc), 12=West African, Bushmen, Ethiopian, 13=Other (0=missed)
-age	entered as text (individuals reporting age < 13 were not recorded)
-engnat	Response to "is English your native language?". 1=yes, 2=no (0=missed)
-gender	Chosen from a drop down menu. 1=Male, 2=Female, 3=Other (0=missed)
-hand	"What hand do you use to write with?". 1=Right, 2=Left, 3=Both (0=missed)
+Race: 1=Mixed Race, 2=Arctic (Siberian, Eskimo), 3=Caucasian (European), 4=Caucasian (Indian), 5=Caucasian (Middle East), 6=Caucasian (North African, Other), 7=Indigenous Australian, 8=Native American, 9=North East Asian (Mongol, Tibetan, Korean Japanese, etc), 10=Pacific (Polynesian, Micronesian, etc), 11=South East Asian (Chinese, Thai, Malay, Filipino, etc), 12=West African, Bushmen, Ethiopian, 13=Other (0=missed)
+
+Age:	entered as text (individuals reporting age < 13 were not recorded)
+Engnat:	Response to "is English your native language?". 1=yes, 2=no (0=missed)
+Gender:	Chosen from a drop down menu. 1=Male, 2=Female, 3=Other (0=missed)
+Hand:	"What hand do you use to write with?". 1=Right, 2=Left, 3=Both (0=missed)
 
 
 ### Interests data:
 
 Interests dataset measures a person's response to following topics on a scale of 1 to 5:
-Music,Classical music,Musical,Pop,Rock,Metal or Hardrock,"Hiphop, Rap",Rock n roll,Alternative,"Techno, Trance",Movies,Horror,Thriller,Comedy,Romantic,Sci-fi,War,Fantasy/Fairy tales,Animated,Documentary,Action,History,Psychology,Politics,Mathematics,Physics,Internet,PC,Economy Management,Biology,Chemistry,Reading,Geography,Foreign languages,Medicine,Law,Cars,Art exhibitions,Religion,Dancing,Musical instruments,Writing,Passive sport,Active sport,Science and technology,Theatre,Adrenaline sports,Pets,Appearence and gestures,Happiness in life,Education
+Music, Classical music, Musical, Pop, Rock,Metal or Hardrock, "Hiphop, Rap", Rock n roll, Alternative, "Techno, Trance",
+Movies, Horror, Thriller, Comedy, Romantic, Sci-fi, War, Fantasy/Fairy tales, Animated, Documentary, Action, 
+History, Psychology, Politics, Mathematics, Physics, Internet, PC, Economy Management, Biology, Chemistry, Reading, Geography, Foreign languages, Medicine, Law,
+Cars, Art exhibitions, Religion, Dancing, Musical instruments, Writing, Passive sport, Active sport, Science and technology, Theatre, Adrenaline sports, Pets, Appearence and gestures,
+Happiness in life, Education
 
 
 
