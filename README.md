@@ -1,6 +1,8 @@
 # Using Machine Learning for matchmaking
 Using Machine Learning to find people with similar personalities &amp; interest for matchmaking
 
+Link to my Medium post explaining this project: https://medium.com/@danishariq007/machine-learning-matchmaking-4416579d4d5e
+
 ### Objective:
 - Using clustering algorithms to cluster people based on their interests.
 - Finding people for a random user from his cluster group.
