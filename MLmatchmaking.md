@@ -1,5 +1,7 @@
 Using Machine Learning For Matchmaking
 ================
+Link to my Medium post explaining this project: https://medium.com/@danishariq007/machine-learning-matchmaking-4416579d4d5e
+
 
 ### Objective:
 
